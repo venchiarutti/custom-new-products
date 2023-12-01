@@ -1,0 +1,25 @@
+<?php
+/**
+ * @var Magento\Framework\View\Element\Template $block
+ * @var Magento\Framework\Escaper $escaper
+ * @var Venchiarutti\CustomNewProducts\ViewModel\NewProducts $viewModel
+ */
+declare(strict_types=1);
+
+$viewModel = $block->getNewProductsViewModel();
+
+if ($viewModel->isEnabled()): ?>
+<div class="product-grid">
+<?php foreach ($viewModel->getNewProducts() as $product): ?>
+    <div class="product-card">
+        <div class="product-image">
+            <img src="<?= $escaper->escapeHtml($product["image"]) ?>" alt="Product Image">
+        </div>
+        <div class="product-info">
+            <h3 class="product-title"><?= $escaper->escapeHtml($product["name"]); ?></h3>
+            <p class="product-price"><?= $escaper->escapeHtml((string) $product["price"]); ?></p>
+        </div>
+    </div>
+<?php endforeach; ?>
+</div>
+<?php endif; ?>
